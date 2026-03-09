@@ -9,9 +9,9 @@ class Semplu < Formula
 
   def install
     system "npm", "install", *std_npm_args(prefix: libexec)
-    bin.mkpath
-    bin.install libexec/"bin/semplu"
-    (bin/"semplu").write_env_script libexec/"bin/semplu", SEMPLU_VERSION: version.to_s
+    version_js = libexec/"lib/node_modules/@asm3r96/semplu/dist/esm/version.js"
+    inreplace version_js, /FALLBACK_VERSION = ".*"/, "FALLBACK_VERSION = \"#{version}\""
+    bin.install_symlink libexec/"bin/semplu"
   end
 
   test do
