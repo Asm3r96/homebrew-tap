@@ -9,13 +9,10 @@ class Semplu < Formula
 
   def install
     system "npm", "install", *std_npm_args(prefix: libexec)
-    bin.write_env_script libexec/"bin/semplu", SEMPLU_VERSION: version.to_s
+    bin.env_script_all_files libexec/"bin", SEMPLU_VERSION: version.to_s
   end
 
   test do
-    pkgroot = libexec/"lib/node_modules/@asm3r96/semplu"
-    cd pkgroot do
-      assert_match version.to_s, shell_output("#{bin}/semplu --version")
-    end
+    assert_match version.to_s, shell_output("#{bin}/semplu --version")
   end
 end
