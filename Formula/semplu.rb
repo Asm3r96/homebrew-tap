@@ -13,6 +13,9 @@ class Semplu < Formula
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/semplu --version")
+    pkgroot = libexec/"lib/node_modules/@asm3r96/semplu"
+    cd pkgroot do
+      assert_match version.to_s, shell_output("#{bin}/semplu --version")
+    end
   end
 end
