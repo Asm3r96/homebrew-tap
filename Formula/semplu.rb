@@ -9,7 +9,7 @@ class Semplu < Formula
 
   def install
     system "npm", "install", *std_npm_args(prefix: libexec)
-    bin.env_script_all_files libexec/"bin", SEMPLU_VERSION: version.to_s
+    (libexec/"bin").env_script_all_files bin, SEMPLU_VERSION: version.to_s
   end
 
   test do
